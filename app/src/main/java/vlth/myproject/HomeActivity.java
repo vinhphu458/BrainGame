@@ -25,17 +25,15 @@ public class HomeActivity extends AppCompatActivity {
     ListView listView;
     List<ItemGame> rowItems;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
-        int score = settings.getInt("HL",0);
-        int score2 = settings.getInt("MW",1);
+//        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+//        int score = settings.getInt("HL",0);
+//        int score2 = settings.getInt("MW",1);
 
-        int[] best_score={score,score2,30,20};
+        int[] best_score={1,1,30,20};
 
         rowItems = new ArrayList<ItemGame>();
         for (int i = 0; i < titles.length; i++) {
