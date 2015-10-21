@@ -1,12 +1,10 @@
 package vlth.myproject;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -15,10 +13,10 @@ import android.widget.TextView;
 
 import java.util.Random;
 
+import vlth.myproject.Util.HighScore;
+import vlth.myproject.Util.ID;
 import vlth.myproject.Util.MyTimer;
-import vlth.myproject.Util.PreferenceUtil;
 import vlth.myproject.Util.SoundUtil;
-import vlth.myproject.Util.Var;
 
 public class HigherOrLower extends AppCompatActivity {
 
@@ -29,14 +27,13 @@ public class HigherOrLower extends AppCompatActivity {
     private MyTimer myTimer;
     private boolean finish = false;
 
+    private HighScore highScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
+        highScore=new HighScore(this);
 
         score = (TextView) findViewById(R.id.point);
         count = (TextView) findViewById(R.id.count);
@@ -116,7 +113,7 @@ public class HigherOrLower extends AppCompatActivity {
             if (finish) {
                 return;
             }
-            PreferenceUtil.setValue(HigherOrLower.this, Var.KEY_SCORE_HIGHER_OR_LOWER, myScore);
+            highScore.setScore(ID.NORMAL_SCORE_HIGHER_OR_LOWER, myScore);
             myScore = 0;
             SoundUtil.play(HigherOrLower.this, SoundUtil.DIE);
             EndDialog endDialog = new EndDialog(HigherOrLower.this, closeDialog);
@@ -128,7 +125,6 @@ public class HigherOrLower extends AppCompatActivity {
     private Handler closeDialog = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            // TODO Auto-generated method stub
             super.handleMessage(msg);
             Intent intent = getIntent();
             finish();
@@ -136,6 +132,16 @@ public class HigherOrLower extends AppCompatActivity {
         }
     };
 
+    @Override
+    public void onBackPressed() {
+        if (myTimer.timer != null) {
+            myTimer.timer.cancel();
+        }
+        finish();
+        startActivity(new Intent(this, HomeActivity.class));
+    }
+
+    @Override
     protected void onDestroy() {
         if (myTimer.timer != null) {
             myTimer.timer.cancel();

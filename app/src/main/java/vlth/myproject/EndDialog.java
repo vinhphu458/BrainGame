@@ -3,6 +3,7 @@ package vlth.myproject;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.view.View;
 import android.view.Window;
@@ -10,19 +11,15 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import vlth.myproject.Util.PreferenceUtil;
-import vlth.myproject.Util.Var;
+import vlth.myproject.Util.HighScore;
+import vlth.myproject.Util.ID;
 
 public class EndDialog extends Dialog {
-
-//    private Context mContext;
 
     private RelativeLayout root;
     private int current_score = 0;
     private int best_score = 0;
     private TextView mTvYourMove, mTvYourBest;
-
-    private Button bt1, bt2;
 
     public EndDialog(Context context, final Handler handler) {
         super(context);
@@ -51,23 +48,22 @@ public class EndDialog extends Dialog {
             }
         });
 
-        if (context instanceof MixWord) {
-            current_score = PreferenceUtil.getValue(context, Var.KEY_SCORE_MIX_WORD, 0);
-            best_score = PreferenceUtil.getValue(context, Var.KEY_BEST_SCORE_MIX_WORD, 0);
-            if (current_score > best_score) {
-                PreferenceUtil.setValue(context, Var.KEY_BEST_SCORE_MIX_WORD, current_score);
+        if(context instanceof HigherOrLower){
+            current_score= HighScore.getScore(ID.NORMAL_SCORE_HIGHER_OR_LOWER,0);
+            best_score=HighScore.getScore(ID.HIGH_SCORE_HIGHER_OR_LOWER,0);
+            if(current_score>best_score){
+                HighScore.setScore(ID.HIGH_SCORE_HIGHER_OR_LOWER, current_score);
             }
         }
-        if (context instanceof HigherOrLower) {
-            current_score = PreferenceUtil.getValue(context, Var.KEY_SCORE_MIX_WORD, 0);
-            best_score = PreferenceUtil.getValue(context, Var.KEY_BEST_SCORE_MIX_WORD, 0);
-            if (current_score> best_score) {
-                PreferenceUtil.setValue(context, Var.KEY_BEST_SCORE_HIGHER_OR_LOWER, current_score);
+        if(context instanceof MixWord){
+            current_score= HighScore.getScore(ID.NORMAL_SCORE_MIX_WORD,0);
+            best_score=HighScore.getScore(ID.HIGH_SCORE_MIX_WORD,0);
+            if(current_score>best_score){
+                HighScore.setScore(ID.HIGH_SCORE_MIX_WORD, current_score);
             }
         }
-
-        mTvYourMove.setText("YOUR MOVE: " + current_score);
-        mTvYourBest.setText("BEST MOVE: " + best_score);
+        mTvYourMove.setText("YOUR SCORE: " + current_score);
+        mTvYourBest.setText("BEST SCORE: " + best_score);
     }
 
 

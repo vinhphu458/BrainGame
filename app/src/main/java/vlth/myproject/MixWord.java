@@ -13,10 +13,10 @@ import android.widget.Toast;
 
 import java.util.Random;
 
+import vlth.myproject.Util.HighScore;
+import vlth.myproject.Util.ID;
 import vlth.myproject.Util.MyTimer;
-import vlth.myproject.Util.PreferenceUtil;
 import vlth.myproject.Util.SoundUtil;
-import vlth.myproject.Util.Var;
 
 public class MixWord extends AppCompatActivity {
 
@@ -33,10 +33,14 @@ public class MixWord extends AppCompatActivity {
 
     private String correct_answer="";
 
+    private HighScore highScore;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mix_word);
+        highScore=new HighScore(this);
+
         prototype();
         setRandomAnsser();
         myTimer = new MyTimer(4000);
@@ -143,7 +147,7 @@ public class MixWord extends AppCompatActivity {
             if (finish) {
                 return;
             }
-            PreferenceUtil.setValue(MixWord.this, Var.KEY_SCORE_MIX_WORD, myScore);
+            highScore.setScore(ID.NORMAL_SCORE_MIX_WORD,myScore);
             myScore = 0;
             SoundUtil.play(MixWord.this, SoundUtil.DIE);
             EndDialog endDialog = new EndDialog(MixWord.this, closeDialog);
