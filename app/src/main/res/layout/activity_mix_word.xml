@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/container"
+    android:weightSum="1"
+    tools:context=".MainActivity">
+
+    <ProgressBar
+        android:id="@+id/proTimer"
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="false" />
+
+    <TextView
+        android:id="@+id/point"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="Your score: 0"
+        android:textSize="32sp" />
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="text"
+        android:layout_weight="0.4"
+        android:textSize="50sp" />
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.4"
+        android:weightSum="1"
+        android:padding="8dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:weightSum="1"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/ans1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="answer 1"
+                android:onClick="answerClick"
+                android:textAllCaps="false"
+                android:layout_weight="0.5"/>
+            <Button
+                android:id="@+id/ans2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="answer 2"
+                android:textAllCaps="false"
+                android:onClick="answerClick"
+                android:layout_weight="0.5"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:weightSum="1"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/ans3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="answer 3"
+                android:textAllCaps="false"
+                android:onClick="answerClick"
+                android:layout_weight="0.5"/>
+            <Button
+                android:id="@+id/ans4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="answer 4"
+                android:textAllCaps="false"
+                android:onClick="answerClick"
+                android:layout_weight="0.5"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
