@@ -14,20 +14,23 @@ import android.os.Handler;
 import android.util.Log;
 import android.widget.ProgressBar;
 
+
+import vlth.myproject.Library.NumberProgressBar;
+
 import static android.graphics.Color.BLUE;
 
 public class MyTimer extends Activity{
 
     public int miliSecond;
     private Handler handler;
-    private ProgressBar progressBar;
+    private NumberProgressBar progressBar;
 
     public CountDownTimer timer;
 
     public void setOnTickHtmlListener(Handler handler) {
         this.handler = handler;
     }
-    public void setProgressBar(ProgressBar progressBar){
+    public void setID(NumberProgressBar progressBar){
         this.progressBar=progressBar;
     }
 
@@ -41,12 +44,11 @@ public class MyTimer extends Activity{
         if (timer != null) {
             timer.cancel();
         }
-
         timer = new CountDownTimer(miliSecond, 1) {
             @Override
             public void onTick(long millisUntilFinished) {
                 // TODO Auto-generated method stub
-                progressBar.getProgressDrawable().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN);
+//                progressBar.getProgressDrawable().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN);
                 progressBar.setProgress((int) millisUntilFinished);
 
             }
@@ -60,7 +62,7 @@ public class MyTimer extends Activity{
 
     public void stop(){
         timer.cancel();
-        progressBar.getProgressDrawable().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+//        progressBar.getProgressDrawable().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
     }
 
 }
