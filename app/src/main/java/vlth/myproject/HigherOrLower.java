@@ -8,11 +8,12 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.TextView;
+
 
 import java.util.Random;
 
+import vlth.myproject.Library.NumberProgressBar;
 import vlth.myproject.Util.HighScore;
 import vlth.myproject.Util.ID;
 import vlth.myproject.Util.MyTimer;
@@ -23,7 +24,7 @@ public class HigherOrLower extends AppCompatActivity {
     private Button btH, btL;
     private TextView num, count, score;
     private int firstNum, lastNum, myScore = 0;
-    private ProgressBar progressBar;
+    private NumberProgressBar progressBar;
     private MyTimer myTimer;
     private boolean finish = false;
 
@@ -40,10 +41,10 @@ public class HigherOrLower extends AppCompatActivity {
         btH = (Button) findViewById(R.id.btHigher);
         btL = (Button) findViewById(R.id.btLower);
         num = (TextView) findViewById(R.id.number);
-        progressBar = (ProgressBar) findViewById(R.id.proTimer);
+        progressBar = (NumberProgressBar) findViewById(R.id.proTimer);
 
         myTimer = new MyTimer(2000);
-        myTimer.setProgressBar(progressBar);
+        myTimer.setID(progressBar);
 
         new CountDownTimer(1000, 1000) {
             @Override

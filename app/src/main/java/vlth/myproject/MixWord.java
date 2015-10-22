@@ -7,12 +7,13 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import java.util.Random;
 
+import vlth.myproject.Library.NumberProgressBar;
 import vlth.myproject.Util.HighScore;
 import vlth.myproject.Util.ID;
 import vlth.myproject.Util.MyTimer;
@@ -22,7 +23,7 @@ public class MixWord extends AppCompatActivity {
 
     Button[] btAnswer;
     TextView txtQuestion, txtScore;
-    ProgressBar progressBar;
+    NumberProgressBar progressBar;
     MyTimer myTimer;
 
     String[] word_array;
@@ -44,7 +45,8 @@ public class MixWord extends AppCompatActivity {
         prototype();
         setRandomAnsser();
         myTimer = new MyTimer(4000);
-        myTimer.setProgressBar(progressBar);
+        myTimer.setID(progressBar);
+
         myTimer.setOnTickHtmlListener(gameLose);
         myTimer.tick();
 
@@ -58,7 +60,7 @@ public class MixWord extends AppCompatActivity {
         btAnswer[3] = (Button) findViewById(R.id.ans4);
         txtQuestion = (TextView) findViewById(R.id.text);
         txtScore = (TextView) findViewById(R.id.point);
-        progressBar = (ProgressBar) findViewById(R.id.proTimer);
+        progressBar = (NumberProgressBar) findViewById(R.id.proTimer);
         word_array = getResources().getStringArray(R.array.mix_word);
     }
 
