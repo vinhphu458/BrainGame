@@ -19,11 +19,13 @@ import vlth.myproject.R;
 public class ListGameAdapter extends ArrayAdapter<ItemGame> {
 
     Context context;
+    int[] imgId;
 
     public ListGameAdapter(Context context, int resourceId,
-                                 List<ItemGame> items) {
+                                 List<ItemGame> items, int[] values) {
         super(context, resourceId, items);
         this.context = context;
+        imgId = values;
     }
 
     /*private view holder class*/
@@ -37,6 +39,7 @@ public class ListGameAdapter extends ArrayAdapter<ItemGame> {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
         ItemGame rowItem = getItem(position);
+        int img = imgId[position];
 
         LayoutInflater mInflater = (LayoutInflater) context
                 .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
@@ -46,14 +49,14 @@ public class ListGameAdapter extends ArrayAdapter<ItemGame> {
 //            holder.txtDesc = (TextView) convertView.findViewById(R.id.desc);
             holder.txtTitle = (TextView) convertView.findViewById(R.id.title);
             holder.txtBestScore = (TextView) convertView.findViewById(R.id.best_score);
-//            holder.imageView = (ImageView) convertView.findViewById(R.id.icon);
+            holder.imageView = (ImageView) convertView.findViewById(R.id.list_image);
             convertView.setTag(holder);
         } else
             holder = (ViewHolder) convertView.getTag();
 
         holder.txtBestScore.setText(""+rowItem.getBest_score());
         holder.txtTitle.setText(rowItem.getTitle());
-//        holder.imageView.setImageResource(rowItem.getImageId());
+        holder.imageView.setImageResource(img);
 
         return convertView;
     }

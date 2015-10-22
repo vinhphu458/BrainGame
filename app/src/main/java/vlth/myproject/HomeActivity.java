@@ -19,6 +19,9 @@ import vlth.myproject.Util.ID;
 public class HomeActivity extends AppCompatActivity {
     public static final String[] titles = new String[] { "Higer or Lower",
             "Mix Word", "Freaking Math", "Color or Shape" };
+
+    public static int[] icon = {R.drawable.hl, R.drawable.wm, R.drawable.fm, R.drawable.geo};
+
     ListView listView;
     List<ItemGame> rowItems;
     private HighScore highScore;
@@ -41,8 +44,7 @@ public class HomeActivity extends AppCompatActivity {
             rowItems.add(item);
         }
         listView = (ListView) findViewById(R.id.list_game);
-        ListGameAdapter adapter = new ListGameAdapter(this,
-                R.layout.game_row, rowItems);
+        ListGameAdapter adapter = new ListGameAdapter(this, R.layout.game_row, rowItems, icon);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -58,10 +60,12 @@ public class HomeActivity extends AppCompatActivity {
                         finish();
                         break;
                     case 2:
-                        Toast.makeText(HomeActivity.this,"Clicked",Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(HomeActivity.this, FreakingMath.class));
+                        finish();
                         break;
                     case 3:
-                        Toast.makeText(HomeActivity.this,"Clicked",Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(HomeActivity.this, ColorShape.class));
+                        finish();
                         break;
                 }
             }
