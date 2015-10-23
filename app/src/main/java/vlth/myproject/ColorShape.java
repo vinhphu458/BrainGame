@@ -1,12 +1,13 @@
 package vlth.myproject;
 
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -14,11 +15,15 @@ import android.graphics.Color;
 
 import java.util.Random;
 
-import vlth.myproject.Util.CgTimer;
+import vlth.myproject.Library.NumberProgressBar;
+import vlth.myproject.Util.HighScore;
+import vlth.myproject.Util.ID;
+import vlth.myproject.Util.MyTimer;
+import vlth.myproject.Util.SoundUtil;
 
 public class ColorShape extends AppCompatActivity {
 
-    private ProgressBar prog;
+    private NumberProgressBar prog;
     private TextView noti;
     private TextView tw1, tw2;
     private TextView point;
@@ -32,12 +37,15 @@ public class ColorShape extends AppCompatActivity {
     String choose1, choose2, result;
     int rd;
 
+    private boolean finish = false;
+    private HighScore highScore;
+    private int myScore = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_color_shape);
 
-        prog = (ProgressBar) findViewById(R.id.prog);
+        prog = (NumberProgressBar) findViewById(R.id.prog);
         noti = (TextView) findViewById(R.id.noti);
         tw1 = (TextView) findViewById(R.id.tw1);
         tw2 = (TextView) findViewById(R.id.tw2);
@@ -73,14 +81,15 @@ public class ColorShape extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void play(final CgTimer timer, final int pnt) {
+    public void play(final MyTimer timer, final int pnt) {
         int num1, num2, num3;
         num1 = randomtype();
         num2 = random();
         num3 = random();
 
-        timer.setProgressBar(prog);
-        timer.tick(noti, point, btnplay, im1, im2);
+        timer.setOnTickHtmlListener(gameLose);
+        timer.setID(prog);
+        timer.tick();
 
         noti.setText("");
         btnplay.setClickable(false);
@@ -129,28 +138,20 @@ public class ColorShape extends AppCompatActivity {
                 switch (rd) {
                     case 0:
                         if (choose1.contains(result)) {
-                            final int i = pnt + 1;
-                            point.setText(Integer.toString(i));
-                            play(timer, i);
+                            myScore = pnt + 1;
+                            point.setText(Integer.toString(myScore));
+                            play(timer, myScore);
                         } else {
-                            timer.stop();
-                            im1.setClickable(false);
-                            im2.setClickable(false);
-                            btnplay.setClickable(true);
-                            noti.setText("You lose");
+                            gameLose.sendEmptyMessage(0);
                         }
                         break;
                     case 1:
                         if (choose2.contains(result)) {
-                            final int i = pnt + 1;
-                            point.setText(Integer.toString(i));
-                            play(timer, i);
+                            myScore = pnt + 1;
+                            point.setText(Integer.toString(myScore));
+                            play(timer, myScore);
                         } else {
-                            timer.stop();
-                            im1.setClickable(false);
-                            im2.setClickable(false);
-                            btnplay.setClickable(true);
-                            noti.setText("You lose");
+                            gameLose.sendEmptyMessage(0);
                         }
                         break;
                 }
@@ -163,28 +164,20 @@ public class ColorShape extends AppCompatActivity {
                 switch (rd) {
                     case 0:
                         if (choose2.contains(result)) {
-                            int i = pnt + 1;
-                            point.setText(Integer.toString(i));
-                            play(timer, i);
+                            myScore = pnt + 1;
+                            point.setText(Integer.toString(myScore));
+                            play(timer, myScore);
                         } else {
-                            timer.stop();
-                            im1.setClickable(false);
-                            im2.setClickable(false);
-                            btnplay.setClickable(true);
-                            noti.setText("You lose");
+                            gameLose.sendEmptyMessage(0);
                         }
                         break;
                     case 1:
                         if (choose1.contains(result)) {
-                            int i = pnt + 1;
-                            point.setText(Integer.toString(i));
-                            play(timer, i);
+                            myScore = pnt + 1;
+                            point.setText(Integer.toString(myScore));
+                            play(timer, myScore);
                         } else {
-                            timer.stop();
-                            im1.setClickable(false);
-                            im2.setClickable(false);
-                            btnplay.setClickable(true);
-                            noti.setText("You lose");
+                            gameLose.sendEmptyMessage(0);
                         }
                         break;
                 }
@@ -192,17 +185,41 @@ public class ColorShape extends AppCompatActivity {
         });
 
     }
+    private Handler gameLose = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (finish) {
+                return;
+            }
+            highScore.setScore(ID.NORMAL_SCORE_COLOR_SHAPE, myScore);
+            myScore = 0;
+            SoundUtil.play(ColorShape.this, SoundUtil.DIE);
+            EndDialog endDialog = new EndDialog(ColorShape.this, closeDialog);
+            endDialog.show();
+            finish = true;
+        }
+
+    };
+
+    private Handler closeDialog = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            Intent intent = getIntent();
+            finish();
+            startActivity(intent);
+        }
+    };
 
     public void btnstart(View view) {
-        final int pnt = 0;
-
         im1.setClickable(true);
         im2.setClickable(true);
 
-        final CgTimer timer = new CgTimer();
+        final MyTimer timer = new MyTimer(2000);
 
         point.setText("");
-        play(timer, pnt);
+        play(timer, myScore);
     }
 
     public int randomtype() {
@@ -488,5 +505,11 @@ public class ColorShape extends AppCompatActivity {
                 }
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        startActivity(new Intent(this, HomeActivity.class));
     }
 }

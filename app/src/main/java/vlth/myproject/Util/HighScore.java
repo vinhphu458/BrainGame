@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import vlth.myproject.ColorShape;
+import vlth.myproject.FreakingMath;
 import vlth.myproject.HigherOrLower;
 import vlth.myproject.MixWord;
 
@@ -24,7 +26,14 @@ public class HighScore {
         if(context instanceof HigherOrLower){
             preferences = context.getSharedPreferences(ID.GAME,0);
         }
-        edit=preferences.edit();
+        if (context instanceof FreakingMath){
+            preferences = context.getSharedPreferences(ID.GAME,0);
+        }
+        if (context instanceof ColorShape){
+            preferences = context.getSharedPreferences(ID.GAME,0);
+        }
+
+        edit = preferences.edit();
         edit = preferences.edit();
         edit.putInt(key, val);
         edit.commit();

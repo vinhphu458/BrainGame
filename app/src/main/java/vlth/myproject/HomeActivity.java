@@ -36,7 +36,8 @@ public class HomeActivity extends AppCompatActivity {
 
         int[] best_score={highScore.getScore(ID.HIGH_SCORE_HIGHER_OR_LOWER,0),
                 highScore.getScore(ID.HIGH_SCORE_MIX_WORD,0),
-        0,0};
+                highScore.getScore(ID.HIGH_SCORE_FREAKING_MATH,0),
+                highScore.getScore(ID.HIGH_SCORE_COLOR_SHAPE,0) };
 
         rowItems = new ArrayList<ItemGame>();
         for (int i = 0; i < titles.length; i++) {
@@ -52,11 +53,11 @@ public class HomeActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position){
                     case 0:
-                        startActivity(new Intent(HomeActivity.this,HigherOrLower.class));
+                        startActivity(new Intent(HomeActivity.this, HigherOrLower.class));
                         finish();
                         break;
                     case 1:
-                        startActivity(new Intent(HomeActivity.this,MixWord.class));
+                        startActivity(new Intent(HomeActivity.this, MixWord.class));
                         finish();
                         break;
                     case 2:

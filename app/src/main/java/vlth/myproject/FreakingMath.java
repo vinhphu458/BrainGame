@@ -10,17 +10,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.Random;
 
-import vlth.myproject.Util.FmTimer;
+import vlth.myproject.Library.NumberProgressBar;
 import vlth.myproject.Util.HighScore;
 import vlth.myproject.Util.ID;
+import vlth.myproject.Util.MyTimer;
 import vlth.myproject.Util.SoundUtil;
 
 public class FreakingMath extends AppCompatActivity {
@@ -29,7 +28,7 @@ public class FreakingMath extends AppCompatActivity {
     private ImageView play;
     private Button ans1, ans2;
     private TextView tw;
-    private ProgressBar pr;
+    private NumberProgressBar pr;
     String result;
     String ans;
 
@@ -85,7 +84,7 @@ public class FreakingMath extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void play (final FmTimer mytimer, final int point) {
+    public void play (final MyTimer mytimer, final int point) {
         int num1, num2, num3;
         num1 = random20();
         num2 = random20();
@@ -96,8 +95,9 @@ public class FreakingMath extends AppCompatActivity {
 
         play.setClickable(false);
 
-        mytimer.setProgressBar(pr);
-        mytimer.tick(gameLose);
+        mytimer.setOnTickHtmlListener(gameLose);
+        mytimer.setID(pr);
+        mytimer.tick();
 
         String math;
 
@@ -199,10 +199,10 @@ public class FreakingMath extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (result.equalsIgnoreCase(ans)) {
-                    final int i = point + 1;
-                    tw.setText(Integer.toString(i));
+                    myScore = point + 1;
+                    tw.setText(Integer.toString(myScore));
                     SoundUtil.play(FreakingMath.this, SoundUtil.WIN);
-                    play(mytimer, i);
+                    play(mytimer, myScore);
                 } else {
                     gameLose.sendEmptyMessage(0);
                 }
@@ -225,12 +225,11 @@ public class FreakingMath extends AppCompatActivity {
     }
 
     public void btnstart(View view) {
-        pr = (ProgressBar) findViewById(R.id.prog);
-        final FmTimer mytimer = new FmTimer();
+        pr = (NumberProgressBar) findViewById(R.id.prog);
+        final MyTimer mytimer = new MyTimer(2000);
 
-        final int point = 0;
-        tw.setText(Integer.toString(point));
-        play(mytimer, point);
+        tw.setText(Integer.toString(myScore));
+        play(mytimer, myScore);
     }
 
     public void btnback(View view) {
@@ -270,7 +269,7 @@ public class FreakingMath extends AppCompatActivity {
             if (finish) {
                 return;
             }
-            highScore.setScore(ID.NORMAL_SCORE_HIGHER_OR_LOWER, myScore);
+            highScore.setScore(ID.NORMAL_SCORE_FREAKING_MATH, myScore);
             myScore = 0;
             SoundUtil.play(FreakingMath.this, SoundUtil.DIE);
             EndDialog endDialog = new EndDialog(FreakingMath.this, closeDialog);
@@ -288,4 +287,10 @@ public class FreakingMath extends AppCompatActivity {
             startActivity(intent);
         }
     };
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        startActivity(new Intent(this, HomeActivity.class));
+    }
 }

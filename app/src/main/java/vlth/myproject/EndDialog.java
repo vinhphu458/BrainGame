@@ -62,6 +62,20 @@ public class EndDialog extends Dialog {
                 HighScore.setScore(ID.HIGH_SCORE_MIX_WORD, current_score);
             }
         }
+        if(context instanceof FreakingMath){
+            current_score= HighScore.getScore(ID.NORMAL_SCORE_FREAKING_MATH,0);
+            best_score=HighScore.getScore(ID.HIGH_SCORE_FREAKING_MATH,0);
+            if(current_score>best_score){
+                HighScore.setScore(ID.HIGH_SCORE_FREAKING_MATH, current_score);
+            }
+        }
+        if(context instanceof ColorShape){
+            current_score= HighScore.getScore(ID.NORMAL_SCORE_COLOR_SHAPE,0);
+            best_score=HighScore.getScore(ID.HIGH_SCORE_COLOR_SHAPE,0);
+            if(current_score>best_score){
+                HighScore.setScore(ID.HIGH_SCORE_COLOR_SHAPE, current_score);
+            }
+        }
         mTvYourMove.setText("YOUR SCORE: " + current_score);
         mTvYourBest.setText("BEST SCORE: " + best_score);
     }

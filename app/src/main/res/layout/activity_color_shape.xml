@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -59,14 +60,25 @@
 
     </LinearLayout>
 
-    <ProgressBar
-        android:layout_width="200dip"
-        android:layout_height="20dp"
-        android:layout_gravity="center"
+    <vlth.myproject.Library.NumberProgressBar
         android:id="@+id/prog"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:max="10"
-        android:layout_weight="1"/>
+        android:layout_width="200dip"
+        android:layout_height="wrap_content"
+
+        custom:progress_unreached_color="#CCCCCC"
+        custom:progress_reached_color="#3498DB"
+
+        custom:progress_unreached_bar_height="3.75dp"
+        custom:progress_reached_bar_height="10.5dp"
+
+        custom:progress_text_size="20sp"
+        custom:progress_text_color="#3498DB"
+        custom:progress_text_offset="1dp"
+        custom:progress_text_visibility="visible"
+
+        android:layout_gravity="center"
+
+        />
 
     <TextView
         android:layout_width="wrap_content"
