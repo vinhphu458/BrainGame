@@ -226,7 +226,7 @@ public class FreakingMath extends AppCompatActivity {
 
     public void btnstart(View view) {
         pr = (NumberProgressBar) findViewById(R.id.prog);
-        final MyTimer mytimer = new MyTimer(2000);
+        final MyTimer mytimer = new MyTimer(1500);
 
         tw.setText(Integer.toString(myScore));
         play(mytimer, myScore);

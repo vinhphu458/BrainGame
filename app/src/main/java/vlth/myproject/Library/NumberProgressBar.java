@@ -59,7 +59,7 @@ public class NumberProgressBar extends View {
     /**
      * The suffix of the number.
      */
-    private String mSuffix = "%";
+    private String mSuffix = "";
 
     /**
      * The prefix.

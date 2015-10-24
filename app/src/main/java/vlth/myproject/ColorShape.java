@@ -216,7 +216,7 @@ public class ColorShape extends AppCompatActivity {
         im1.setClickable(true);
         im2.setClickable(true);
 
-        final MyTimer timer = new MyTimer(2000);
+        final MyTimer timer = new MyTimer(1500);
 
         point.setText("");
         play(timer, myScore);
