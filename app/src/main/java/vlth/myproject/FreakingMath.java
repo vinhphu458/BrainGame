@@ -288,9 +288,4 @@ public class FreakingMath extends AppCompatActivity {
         }
     };
 
-    @Override
-    public void onBackPressed() {
-        finish();
-        startActivity(new Intent(this, HomeActivity.class));
-    }
 }

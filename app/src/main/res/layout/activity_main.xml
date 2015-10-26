@@ -6,62 +6,99 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/container"
+    android:weightSum="1"
     tools:context=".MainActivity">
 
 
-
-    <vlth.myproject.Library.NumberProgressBar
-        android:id="@+id/proTimer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        custom:progress_unreached_color="#CCCCCC"
-        custom:progress_reached_color="#3498DB"
-
-        custom:progress_unreached_bar_height="3.75dp"
-        custom:progress_reached_bar_height="10.5dp"
-
-        custom:progress_text_size="20sp"
-        custom:progress_text_color="#3498DB"
-        custom:progress_text_offset="1dp"
-        custom:progress_text_visibility="visible"
-
-        />
-    <TextView
-        android:id="@+id/point"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:text="Your score: 0"
-        android:textSize="32sp" />
-    <TextView
-        android:id="@+id/number"
+        android:layout_height="0dp"
+        android:layout_weight="0.3">
+
+        <vlth.myproject.Library.NumberProgressBar
+            android:id="@+id/proTimer"
+            style="@style/NumberProgressBar_Default"
+            />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:weightSum="1"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="0"
+                android:textColor="#fff"
+                android:textSize="32sp" />
+            <TextView
+                android:id="@+id/point"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:gravity="end"
+                android:text="0"
+                android:textColor="#fff"
+                android:textSize="32sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="0dp"
+        android:layout_weight="0.4"
+        android:weightSum="1"
         android:gravity="center"
-        android:text="1"
-        android:textSize="50sp" />
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/number"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="0.6"
+            android:textStyle="bold"
+            android:textColor="#fff"
+            android:background="@drawable/corner"
+            android:textSize="50sp" />
+        <LinearLayout
+            android:layout_marginLeft="8dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:orientation="vertical">
+            <ImageButton
+                android:soundEffectsEnabled="false"
+                android:id="@+id/btHigher"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5"
+                android:onClick="choose"
+                android:background="@drawable/bt_corner"
+                android:src="@drawable/ic_up"/>
 
-    <Button
-        android:soundEffectsEnabled="false"
-        android:id="@+id/btHigher"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="choose"
-        android:text="Higher" />
+            <ImageButton
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bt_corner"
+                android:soundEffectsEnabled="false"
+                android:id="@+id/btLower"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5"
+                android:onClick="choose"
+                android:src="@drawable/ic_down" />
 
-    <Button
-        android:soundEffectsEnabled="false"
-        android:id="@+id/btLower"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="choose"
-        android:text="Lower" />
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/count"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+
+
 </LinearLayout>

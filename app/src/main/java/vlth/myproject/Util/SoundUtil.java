@@ -11,7 +11,7 @@ public class SoundUtil {
 	
  
 	public static int WIN = R.raw.win;
-	public static int DIE = R.raw.close;
+	public static int DIE = R.raw.lose;
 
 	public static void play(Context context, int sound) {
 		final MediaPlayer mediaPlayer = MediaPlayer.create(context, sound);

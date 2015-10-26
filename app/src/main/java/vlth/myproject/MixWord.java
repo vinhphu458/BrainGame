@@ -169,6 +169,15 @@ public class MixWord extends AppCompatActivity {
         }
     };
 
+    @Override
+    public void onBackPressed() {
+        if (myTimer.timer != null) {
+            myTimer.timer.cancel();
+        }
+        finish();
+        startActivity(new Intent(this, HomeActivity.class));
+    }
+
     protected void onDestroy() {
         if (myTimer.timer != null) {
             myTimer.timer.cancel();
