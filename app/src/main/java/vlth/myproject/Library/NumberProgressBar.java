@@ -308,7 +308,7 @@ public class NumberProgressBar extends View {
             mReachedRectF.right = mDrawTextStart - mOffset;
         }
 
-        float unreachedBarStart = mDrawTextStart + mDrawTextWidth + mOffset;
+        float unreachedBarStart = mDrawTextStart + mDrawTextWidth;
         if (unreachedBarStart >= getWidth() - getPaddingRight()) {
             mDrawUnreachedBar = false;
         } else {
@@ -430,7 +430,7 @@ public class NumberProgressBar extends View {
             setProgress(getProgress() + by);
         }
 
-        if(mListener != null){
+        if (mListener != null) {
             mListener.onProgressChange(getProgress(), getMax());
         }
     }
@@ -501,5 +501,5 @@ public class NumberProgressBar extends View {
         return mIfDrawText;
     }
 
-    
+
 }

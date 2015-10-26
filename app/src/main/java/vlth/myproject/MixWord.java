@@ -2,11 +2,14 @@ package vlth.myproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,20 +38,29 @@ public class MixWord extends AppCompatActivity {
     private String correct_answer="";
 
     private HighScore highScore;
+    private FloatingActionButton fab;
+    private LinearLayout main_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mix_word);
         highScore=new HighScore(this);
-
         prototype();
         setRandomAnsser();
         myTimer = new MyTimer(4000);
         myTimer.setID(progressBar);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                main_view.setVisibility(View.VISIBLE);
+                fab.setVisibility(View.GONE);
+                myTimer.tick();
+                myTimer.setOnTickHtmlListener(gameLose);
+            }
+        });
 
-        myTimer.setOnTickHtmlListener(gameLose);
-        myTimer.tick();
+
 
     }
 
@@ -62,6 +74,8 @@ public class MixWord extends AppCompatActivity {
         txtScore = (TextView) findViewById(R.id.point);
         progressBar = (NumberProgressBar) findViewById(R.id.proTimer);
         word_array = getResources().getStringArray(R.array.mix_word);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        main_view=(LinearLayout)findViewById(R.id.main_layout);
     }
 
 
