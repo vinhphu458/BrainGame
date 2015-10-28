@@ -22,7 +22,7 @@ import static android.graphics.Color.BLUE;
 
 public class MyTimer extends Activity{
 
-    public int miliSecond;
+    private int miliSecond;
     private Handler handler;
     private NumberProgressBar progressBar;
     public CountDownTimer timer;

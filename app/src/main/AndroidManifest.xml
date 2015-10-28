@@ -23,6 +23,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".NumberMemory"
+            android:label="@string/title_activity_number_memory" >
+        </activity>
     </application>
 
 </manifest>
