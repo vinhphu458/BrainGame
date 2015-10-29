@@ -137,7 +137,7 @@ public class MixWord extends AppCompatActivity {
         }
         btAnswer[3].setText(sb4);
 
-        ca_position = r.nextInt(3);
+        ca_position = r.nextInt(4);
         btAnswer[ca_position].setText(correct_answer);
 
 

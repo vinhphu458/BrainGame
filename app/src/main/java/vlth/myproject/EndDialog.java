@@ -11,6 +11,10 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.facebook.FacebookSdk;
+import com.facebook.share.model.AppInviteContent;
+import com.facebook.share.widget.AppInviteDialog;
+
 import vlth.myproject.Util.HighScore;
 import vlth.myproject.Util.ID;
 
@@ -20,16 +24,19 @@ public class EndDialog extends Dialog {
     private int current_score = 0;
     private int best_score = 0;
     private TextView mTvYourMove, mTvYourBest;
-
+    private Button btInvite;
     public EndDialog(Context context, final Handler handler) {
         super(context);
         // TODO Auto-generated constructor stub
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+
         setContentView(R.layout.end_dialog);
         getWindow().setBackgroundDrawableResource(R.drawable.bg_dialog);
 
         mTvYourMove = (TextView) this.findViewById(R.id.yourMove);
         mTvYourBest = (TextView) this.findViewById(R.id.yourBest);
+        btInvite=(Button)this.findViewById(R.id.btinvite);
 
         root = (RelativeLayout) findViewById(R.id.root);
         root.setOnClickListener(new View.OnClickListener() {
