@@ -28,6 +28,7 @@
                     android:scheme="game" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
 
         <activity
             android:name="com.facebook.FacebookActivity"
@@ -42,6 +43,12 @@
             android:name="com.facebook.FacebookContentProvider"
             android:authorities="com.facebook.app.FacebookContentProvider787782571365958"
             android:exported="true" />
+=======
+        <activity
+            android:name=".NumberMemory"
+            android:label="@string/title_activity_number_memory" >
+        </activity>
+>>>>>>> a0a5b93afa040dc38fef86780f3ad74964b2994a
     </application>
 
 </manifest>

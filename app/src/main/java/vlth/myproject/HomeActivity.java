@@ -33,10 +33,15 @@ import vlth.myproject.Util.HighScore;
 import vlth.myproject.Util.ID;
 
 public class HomeActivity extends AppCompatActivity {
+<<<<<<< HEAD
     public static final String[] titles = new String[]{"Higer or Lower",
             "Mix Word", "Freaking Math", "Color or Shape"};
+=======
+    public static final String[] titles = new String[] { "Higer or Lower",
+            "Mix Word", "Freaking Math", "Color or Shape", "Find Image"};
+>>>>>>> a0a5b93afa040dc38fef86780f3ad74964b2994a
 
-    public static int[] icon = {R.drawable.hl, R.drawable.wm, R.drawable.fm, R.drawable.geo};
+    public static int[] icon = {R.drawable.hl, R.drawable.wm, R.drawable.fm, R.drawable.geo, R.drawable.find};
 
     ListView listView;
     List<ItemGame> rowItems;
@@ -76,6 +81,7 @@ public class HomeActivity extends AppCompatActivity {
 
 //                startActivity(new Intent(HomeActivity.this,InviteFriendsActivity.class));
 
+<<<<<<< HEAD
                 ShareLinkContent content = new ShareLinkContent.Builder()
                         .setContentUrl(Uri.parse("https://developers.facebook.com"))
                         .build();
@@ -103,6 +109,13 @@ public class HomeActivity extends AppCompatActivity {
                 highScore.getScore(ID.HIGH_SCORE_MIX_WORD, 0),
                 highScore.getScore(ID.HIGH_SCORE_FREAKING_MATH, 0),
                 highScore.getScore(ID.HIGH_SCORE_COLOR_SHAPE, 0)};
+=======
+        int[] best_score={highScore.getScore(ID.HIGH_SCORE_HIGHER_OR_LOWER,0),
+                highScore.getScore(ID.HIGH_SCORE_MIX_WORD,0),
+                highScore.getScore(ID.HIGH_SCORE_FREAKING_MATH,0),
+                highScore.getScore(ID.HIGH_SCORE_COLOR_SHAPE,0),
+        highScore.getScore(ID.HIGH_SCORE_FIND_IMAGE, 0)};
+>>>>>>> a0a5b93afa040dc38fef86780f3ad74964b2994a
 
         rowItems = new ArrayList<ItemGame>();
         for (int i = 0; i < titles.length; i++) {
@@ -133,6 +146,8 @@ public class HomeActivity extends AppCompatActivity {
                         startActivity(new Intent(HomeActivity.this, ColorShape.class));
                         finish();
                         break;
+                    case 4:
+                        startActivity(new Intent(HomeActivity.this, NumberMemory.class));
                 }
             }
         });
